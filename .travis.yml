@@ -26,4 +26,11 @@ script:
   - cmake ..
   - make
   - ctest < ../test.txt --output-on-failure
- 
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then valgrind --tool=memcheck --leak-check=yes ctest < ../test.txt ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then valgrind --tool=memcheck --leak-check=yes ./prog -c a.bin 2 < ../test.txt; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then valgrind --tool=memcheck --leak-check=yes ./prog -r a.bin; fi
+  - cd ..
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cppcheck --enable=all --error-exitcode=1 -I include ./test ./src ./include/*.h --check-config ; fi
+  
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

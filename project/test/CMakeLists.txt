@@ -1,3 +1,5 @@
+set(CMAKE_CXX_FLAGS "-fprofile-arcs -ftest-coverage --coverage")
+set(CMAKE_CXX_STANDARD 17)
 include_directories("${PROJECT_SOURCE_DIR}/project/include")
 
 file(GLOB sources "${PROJECT_SOURCE_DIR}/project/src/*.c")
