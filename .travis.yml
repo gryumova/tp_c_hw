@@ -20,7 +20,7 @@ addons:
 
 script:
   # скрипт сборки и тестирования проекта:
-  - ./linters/run.sh --local
+  - ./project/linters/run.sh --local
   - mkdir build
   - cd build
   - cmake ..
