@@ -22,22 +22,22 @@ TEST(Test_file, wrong_filename) {
 
 TEST(Teat_file, empty_file) {
     char filename[] = "notest.bin";
-    TaskList_t* structure = nullptr;
+    TaskList_t* structure = NULL;
     structure = read_file(filename);
     ASSERT_EQ(print_task(structure), PRINT_ERROR);
 }
 
 TEST(Test_add, null_elem) {
-    Task* elem = nullptr;
-    TaskList_t* head = nullptr;
-    ASSERT_EQ(add_elem(elem, head), nullptr);
+    Task* elem = NULL;
+    TaskList_t* head = NULL;
+    ASSERT_EQ(add_elem(elem, head), NULL);
 }
 
 TEST(Test_print, null_head) {
-    TaskList_t* head = nullptr;
+    TaskList_t* head = NULL;
     ASSERT_EQ(print_task(head), PRINT_ERROR);
 }
 
 TEST(Test_struct, null_initialise) {
-    ASSERT_EQ(initialise(nullptr), nullptr);
+    ASSERT_EQ(initialise(NULL), NULL);
 }
