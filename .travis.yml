@@ -1,0 +1,29 @@
+dist:     trusty  
+sudo:     required 
+
+language: c       
+
+os:
+    - linux
+
+compiler:
+    - gcc
+
+addons:
+  apt:
+    packages:
+      - lcov
+      - valgrind
+      - cppcheck
+      - make
+      - cmake
+
+script:
+  # скрипт сборки и тестирования проекта:
+  - ./linters/run.sh --local
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
+  - ctest < ../test.txt --output-on-failure
+ 

@@ -1,0 +1,28 @@
+cmake_minimum_required(VERSION 3.8)
+project(project)
+
+
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+
+configure_file(CMakeLists.txt.in
+        googletest-download/CMakeLists.txt)
+execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+execute_process(COMMAND ${CMAKE_COMMAND} --build .
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+
+add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
+        ${CMAKE_BINARY_DIR}/googletest-build)
+
+enable_testing()
+add_subdirectory(project/test)
+
+
+include_directories("${PROJECT_SOURCE_DIR}/project/include")
+file(GLOB sources
+  "${PROJECT_SOURCE_DIR}/project/include/*.h"
+  "${PROJECT_SOURCE_DIR}/project/src/*.c")
+add_executable(prog ${sources})
