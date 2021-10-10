@@ -27,17 +27,10 @@ TEST(Teat_file, empty_file) {
     ASSERT_EQ(print_task(structure), PRINT_ERROR);
 }
 
-TEST(Test_add, null_elem) {
-    Task* elem = NULL;
-    TaskList_t* head = NULL;
-    ASSERT_EQ(add_elem(elem, head), NULL);
-}
 
 TEST(Test_print, null_head) {
     TaskList_t* head = NULL;
     ASSERT_EQ(print_task(head), PRINT_ERROR);
 }
 
-TEST(Test_struct, null_initialise) {
-    ASSERT_EQ(initialise(NULL), NULL);
-}
+
