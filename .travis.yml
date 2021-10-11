@@ -33,7 +33,7 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then valgrind --tool=memcheck --leak-check=yes ./prog -c a.bin 2 < ../test.txt; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then valgrind --tool=memcheck --leak-check=yes ./prog -r a.bin; fi
   - cd ..
-  - ppcheck ./project/src/main.c ./project/src/read_write.c ./project/src/task_structure.c
+  - cppcheck ./project/src/main.c ./project/src/read_write.c ./project/src/task_structure.c
   
 after_success:
   - bash <(curl -s https://codecov.io/bash)
