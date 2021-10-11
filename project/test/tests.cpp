@@ -20,7 +20,7 @@ TEST(Test_file, wrong_filename) {
     ASSERT_EQ(write_file(1, filename, "-a"), FAILED_FILE_OPENNING);
 }
 
-TEST(Test_file, empty_file) {
+TEST(Test_file, print_empty) {
     char filename[] = "notest.bin";
     TaskList_t* structure = nullptr;
     structure = read_file(filename);
@@ -45,8 +45,6 @@ TEST(Test_task, add_elem_null) {
     ASSERT_EQ(add_elem(elem, head), nullptr);
 }
 
-
-
 TEST(Test_task, read_file) {
     TaskList_t* head = nullptr;
     char filename[] = "test.bin";
@@ -56,4 +54,15 @@ TEST(Test_task, read_file) {
     ASSERT_EQ(print_task(head), 0);
     clear(head);
     fclose(stdout);
+}
+
+TEST(Test_file, read_empty_file) {
+    char filename[] = "../../test.txt";
+    ASSERT_EQ(read_file(filename), nullptr);
+}
+
+TEST(Test_task, sort_date) {
+    TaskList_t* head = nullptr;
+    Task* elem = nullptr;
+    ASSERT_EQ(sort_by_date(head, elem), nullptr);
 }
