@@ -19,7 +19,7 @@ TaskList_t *sort_by_date(TaskList_t *head, Task *elem) {
     return NULL;
   }
   TaskList_t *current = head;
-  TaskList_t *next_current = next_current->next;
+  TaskList_t *next_current = current->next;
   while (next_current && next_current->data.priority == elem->priority) {
     if (date_comparison(next_current->data.date, elem->date)) {
       return current;
@@ -54,6 +54,9 @@ TaskList_t *add_elem(Task *new_task, TaskList_t *head) {
         pre_current = sort_by_date(pre_current, new_task);
       }
       current = insert_task(pre_current, new_task);
+      if (current == NULL) {
+        return NULL;
+      }
       return head;
     }
     pre_current = current;
@@ -122,7 +125,7 @@ int print_task(TaskList_t *head) {
   TaskList_t *q = head;
   printf("----------------------\n");
   while (q != NULL) {
-    printf("Id task: %lu\nPriority: %d\n%s\n", q->data.id_task,
+    printf("Id task: %d\nPriority: %d\n%s\n", q->data.id_task,
            q->data.priority, q->data.description);
     printf("Date: %d.%d.%d\n\n", q->data.date.day, q->data.date.mn,
            q->data.date.year);

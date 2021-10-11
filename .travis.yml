@@ -22,10 +22,6 @@ addons:
       - make
       - cmake
 
-install:
-  - sudo apt update
-  - sudo apt install cppcheck
-
 
 script:
   - mkdir build
@@ -37,7 +33,7 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then valgrind --tool=memcheck --leak-check=yes ./prog -c a.bin 2 < ../test.txt; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then valgrind --tool=memcheck --leak-check=yes ./prog -r a.bin; fi
   - cd ..
-  - cppcheck --enable=all --error-exitcode=1 -I project/include ./project/test ./project/src ./project/include/*.h; fi
+  - cppcheck ./project/src/main.c ./project/src/read_wrira.c ./project/src/task_structure.c; fi
   
 after_success:
   - bash <(curl -s https://codecov.io/bash)

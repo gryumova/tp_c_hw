@@ -28,7 +28,7 @@ int write_file(const size_t k, const char filename[], const char action[]) {
 
   size_t i = 0;
   while (i < k) {
-    if (fscanf(stdin, "%10lu%2d%30s%2d.%2d.%4d", &info->id_task,
+    if (fscanf(stdin, "%10d%2d%30s%2d.%2d.%4d", &info->id_task,
                &info->priority, info->description, &info->date.day,
                &info->date.mn, &info->date.year) < 0) {
       puts("Error getting full data");
@@ -67,12 +67,14 @@ TaskList_t *read_file(const char filename[]) {
   if (get_data == NULL) {
     puts("Memory error");
     fclose(database);
+    free(get_data);
     return NULL;
   }
 
   if (fread(get_data, sizeof(Task), 1, database) == 0) {
     puts("FILE IS EMPTY");
     fclose(database);
+    free(get_data);
     return NULL;
   }
 

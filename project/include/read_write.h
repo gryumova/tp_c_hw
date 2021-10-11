@@ -23,7 +23,7 @@ typedef struct Date {
 } Date;
 
 typedef struct Task {
-    size_t id_task;
+    int id_task;
     int priority;
     char description[30];
     Date date;
