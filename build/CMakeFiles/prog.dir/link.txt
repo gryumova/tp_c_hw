@@ -1,1 +1,0 @@
-/usr/bin/cc --coverage   CMakeFiles/prog.dir/project/src/main.c.o CMakeFiles/prog.dir/project/src/read_write.c.o CMakeFiles/prog.dir/project/src/task_structure.c.o  -o prog 

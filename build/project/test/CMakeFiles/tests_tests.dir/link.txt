@@ -1,1 +1,0 @@
-/usr/bin/c++  -fprofile-arcs -ftest-coverage --coverage   CMakeFiles/tests_tests.dir/__/src/read_write.c.o CMakeFiles/tests_tests.dir/__/src/task_structure.c.o CMakeFiles/tests_tests.dir/tests.cpp.o CMakeFiles/tests_tests.dir/main.cpp.o  -o tests_tests  ../../googletest-build/googlemock/gtest/libgtest_main.a ../../googletest-build/googlemock/gtest/libgtest.a -pthread 
