@@ -9,6 +9,10 @@ os:
 compiler:
     - gcc
 
+env:
+  global:
+    - CODECOV_TOKEN='90b6a608-0d2f-4540-8a40-1fc02988468c'
+
 addons:
   apt:
     packages:
@@ -17,6 +21,10 @@ addons:
       - cppcheck
       - make
       - cmake
+
+install:
+  - sudo apt update
+  - sudo apt install cppcheck
 
 
 script:
@@ -29,7 +37,7 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then valgrind --tool=memcheck --leak-check=yes ./prog -c a.bin 2 < ../test.txt; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then valgrind --tool=memcheck --leak-check=yes ./prog -r a.bin; fi
   - cd ..
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cppcheck --error-exitcode=1 -I project/include ./project/test ./project/src ./project/include/*.h; fi
+  - cppcheck --enable=all --error-exitcode=1 -I project/include ./project/test ./project/src ./project/include/*.h; fi
   
 after_success:
   - bash <(curl -s https://codecov.io/bash)
