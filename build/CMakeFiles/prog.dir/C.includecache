@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/elizaveta/Рабочий стол/Технопа/hw/project/include/read_write.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+
+/home/elizaveta/Рабочий стол/Технопа/hw/project/include/task_structure.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+stdbool.h
+-
+../include/read_write.h
+/home/elizaveta/Рабочий стол/Технопа/hw/project/include/read_write.h
+
+/home/elizaveta/Рабочий стол/Технопа/hw/project/src/main.c
+../include/read_write.h
+/home/elizaveta/Рабочий стол/Технопа/hw/project/include/read_write.h
+../include/task_structure.h
+/home/elizaveta/Рабочий стол/Технопа/hw/project/include/task_structure.h
+
+/home/elizaveta/Рабочий стол/Технопа/hw/project/src/read_write.c
+../include/read_write.h
+/home/elizaveta/Рабочий стол/Технопа/hw/project/include/read_write.h
+../include/task_structure.h
+/home/elizaveta/Рабочий стол/Технопа/hw/project/include/task_structure.h
+stdbool.h
+-
+
+/home/elizaveta/Рабочий стол/Технопа/hw/project/src/task_structure.c
+../include/task_structure.h
+/home/elizaveta/Рабочий стол/Технопа/hw/project/include/task_structure.h
+
