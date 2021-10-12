@@ -20,23 +20,23 @@ typedef struct Date {
     int year;
     int mn;
     int day;
-} Date;
+} Date_t;
 
 typedef struct Task {
     int id_task;
     int priority;
     char description[30];
-    Date date;
-} Task;
+    Date_t date;
+} Task_t;
 
 
 typedef struct TaskList TaskList_t;
 typedef struct TaskList {
-    Task data;
+    Task_t data;
     TaskList_t* next;
 } TaskList_t;
 
 
 
-int write_file(const size_t k, const char filename[], const char action[]);
-TaskList_t* read_file(const char filename[]); 
+int write_file(size_t k, const char* filename, const char action[]);
+TaskList_t* read_file(const char* filename); 

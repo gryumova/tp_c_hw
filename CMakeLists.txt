@@ -22,8 +22,7 @@ enable_testing()
 add_subdirectory(project/test)
 
 
-include_directories("${PROJECT_SOURCE_DIR}/project/include")
+
 file(GLOB sources
-  "${PROJECT_SOURCE_DIR}/project/include/*.h"
   "${PROJECT_SOURCE_DIR}/project/src/*.c")
 add_executable(prog ${sources})

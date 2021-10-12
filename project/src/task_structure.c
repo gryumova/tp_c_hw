@@ -1,6 +1,6 @@
 #include "../include/task_structure.h"
 
-const bool date_comparison(Date date1, Date date2) {
+bool date_comparison(Date_t date1, Date_t date2) {
   if (date1.year == date2.year && date1.mn == date2.mn) {
     if (date1.day > date2.day)
       return true;
@@ -14,7 +14,7 @@ const bool date_comparison(Date date1, Date date2) {
   return false;
 }
 
-TaskList_t *sort_by_date(TaskList_t *head, Task *elem) {
+TaskList_t *sort_by_date(TaskList_t *head, Task_t *elem) {
   if (head == NULL || elem == NULL) {
     return NULL;
   }
@@ -30,7 +30,7 @@ TaskList_t *sort_by_date(TaskList_t *head, Task *elem) {
   return current;
 }
 
-TaskList_t *add_elem(Task *new_task, TaskList_t *head) {
+TaskList_t *add_elem(Task_t *new_task, TaskList_t *head) {
   if (new_task == NULL || head == NULL) {
     return NULL;
   }
@@ -68,7 +68,7 @@ TaskList_t *add_elem(Task *new_task, TaskList_t *head) {
   return head;
 }
 
-TaskList_t *initialise(Task *elem) {
+TaskList_t *initialise(Task_t *elem) {
   if (elem == NULL) {
     return NULL;
   }
@@ -90,7 +90,7 @@ TaskList_t *initialise(Task *elem) {
   return current;
 }
 
-TaskList_t *insert_task(TaskList_t *task, Task *elem) {
+TaskList_t *insert_task(TaskList_t *task, Task_t *elem) {
   if (elem == NULL || task == NULL) {
     return NULL;
   }
