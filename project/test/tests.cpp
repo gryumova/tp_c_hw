@@ -40,7 +40,7 @@ TEST(Test_task, initialise_task_null) {
 }
 
 TEST(Test_task, add_elem_null) {
-    Task* elem = nullptr;
+    Task_t* elem = nullptr;
     TaskList_t* head = nullptr;
     ASSERT_EQ(add_elem(elem, head), nullptr);
 }
@@ -63,6 +63,13 @@ TEST(Test_file, read_empty_file) {
 
 TEST(Test_task, sort_date) {
     TaskList_t* head = nullptr;
-    Task* elem = nullptr;
+    Task_t* elem = nullptr;
     ASSERT_EQ(sort_by_date(head, elem), nullptr);
 }
+
+TEST(Test_task, insert_empty_task) {
+    TaskList_t* head = nullptr;
+    Task_t* elem = nullptr;
+    ASSERT_EQ(insert_task(head, elem), nullptr);
+}
+
