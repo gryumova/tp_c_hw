@@ -28,9 +28,9 @@ script:
   - cd build
   - cmake ..
   - make
-  - ctest < ../test.txt --output-on-failure
+  - ctest < ../test.txt --output-on-failures
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then valgrind --tool=memcheck --leak-check=yes ctest < ../test.txt ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then valgrind --tool=memcheck --leak-check=yes ./prog -c a.bin 3 < ../test.txt; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then valgrind --tool=memcheck --leak-check=yes ./prog -c a.bin 6 < ../test.txt; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then valgrind --tool=memcheck --leak-check=yes ./prog -r a.bin; fi
   - cd ..
   - cppcheck ./project/src/main.c ./project/src/read_write.c ./project/src/task_structure.c
