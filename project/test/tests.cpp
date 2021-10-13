@@ -15,6 +15,11 @@ TEST(Test_file, add) {
     ASSERT_EQ(write_file(1, filename, "-a"), 0);
 }
 
+TEST(Test_file, read_empty) {
+    char filename[] = "../../test.bin";
+    ASSERT_EQ(read_file(filename), nullptr);
+}
+
 TEST(Test_file, wrong_filename) {
     char filename[] = "";
     ASSERT_EQ(write_file(1, filename, "-a"), FAILED_FILE_OPENNING);
@@ -61,11 +66,12 @@ TEST(Test_file, read_empty_file) {
     ASSERT_EQ(read_file(filename), nullptr);
 }
 
-TEST(Test_task, sort_date) {
+TEST(Test_task, sort_date1) {
     TaskList_t* head = nullptr;
     Task_t* elem = nullptr;
     ASSERT_EQ(sort_by_date(head, elem), nullptr);
 }
+
 
 TEST(Test_task, insert_empty_task) {
     TaskList_t* head = nullptr;
