@@ -7,19 +7,20 @@ set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
 set(CMAKE_C_FLAGS "--coverage")
 
-configure_file(CMakeLists.txt.in
-        googletest-download/CMakeLists.txt)
-execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
-execute_process(COMMAND ${CMAKE_COMMAND} --build .
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+find_package(Threads REQUIRED)
+# configure_file(CMakeLists.txt.in
+#         googletest-download/CMakeLists.txt)
+# execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+#         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+# execute_process(COMMAND ${CMAKE_COMMAND} --build .
+#         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
 
-add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
-        ${CMAKE_BINARY_DIR}/googletest-build)
+# add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
+#         ${CMAKE_BINARY_DIR}/googletest-build)
 
 
-enable_testing()
-add_subdirectory(project/test)
+# enable_testing()
+# add_subdirectory(project/test)
 
 
 

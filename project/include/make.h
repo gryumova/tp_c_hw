@@ -1,0 +1,26 @@
+#pragma once
+#include <stdio.h>
+#include <stdlib.h>
+
+#define ROWS 10
+#define COLS 8
+
+enum error_list {
+    NO_ERROR = 0,
+    WRONG_NUM_OF_ARG = 1,
+    FAILED_FILE_OPENNING = 2,
+    MEM_ERROR = 3,
+    PRINT_ERROR = 4,
+    CANNOT_GET_MATRIX = 5,
+};
+
+typedef struct matrix {
+    float **data;
+    size_t row;
+    size_t col;
+} matrix_t;
+
+
+matrix_t* read_matrix(const char* filename);
+int print_matrix(matrix_t* matrix);
+int clear(matrix_t *matrix);
