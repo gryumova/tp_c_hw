@@ -2,9 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define ROWS 10
-#define COLS 8
-
 enum error_list {
     NO_ERROR = 0,
     WRONG_NUM_OF_ARG = 1,
@@ -12,15 +9,18 @@ enum error_list {
     MEM_ERROR = 3,
     PRINT_ERROR = 4,
     CANNOT_GET_MATRIX = 5,
+    FILE_ERROR = 6,
 };
 
 typedef struct matrix {
     float **data;
+    float *sum_by_column;
     size_t row;
     size_t col;
 } matrix_t;
 
 
-matrix_t* read_matrix(const char* filename);
+matrix_t *read_matrix(FILE *read_file);
 int print_matrix(matrix_t* matrix);
+int print_answer(matrix_t *task);
 int clear(matrix_t *matrix);

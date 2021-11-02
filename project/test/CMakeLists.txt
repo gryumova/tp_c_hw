@@ -2,9 +2,6 @@
 # set(CMAKE_CXX_STANDARD 17)
 # include_directories("${PROJECT_SOURCE_DIR}/project/include")
 
-# file(GLOB sources "${PROJECT_SOURCE_DIR}/project/src/*.c")
-# list(REMOVE_ITEM sources "${PROJECT_SOURCE_DIR}/project/src/main.c")
-
 # file(GLOB tests "${PROJECT_SOURCE_DIR}/project/test/*.cpp")
 # list(REMOVE_ITEM tests "${PROJECT_SOURCE_DIR}/project/test/main.cpp")
 
@@ -15,6 +12,6 @@
 #     ${sources}
 #     ${file}
 #     "${PROJECT_SOURCE_DIR}/project/test/main.cpp")
-#   target_link_libraries("${name}_tests" gtest_main)
+#   target_link_libraries("${name}_tests" gtest_main one_process multi_process)
 #   add_test(NAME ${name} COMMAND "${name}_tests")
 # endforeach()

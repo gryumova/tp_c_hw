@@ -1,21 +1,19 @@
-#include "../include/sum.h"
+#include "sum.h"
 
-float *find_sum(matrix_t *task) {
+int find_sum(matrix_t *task) {
   if (task == NULL) {
-    return NULL;
+    return MEM_ERROR;
   }
-
-  float *sum_ = malloc(sizeof(float) * task->col);
-  if (sum_ = NULL) {
-    return NULL;
-  }
-
+  
+  task->sum_by_column = malloc(sizeof(float) * task->col);
+  
   for (size_t i = 0; i < task->col; i++) {
-    sum_[i] = 0;
+    task->sum_by_column[i] = 0;
     for (size_t j = 0; j < task->row; j++) {
-      sum_[i] += task->data[j][i];
+      task->sum_by_column[i] += task->data[j][i];
     }
   }
 
-  return sum_;
+  return NO_ERROR;
 }
+

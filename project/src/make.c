@@ -1,44 +1,35 @@
-#include "../include/make.h"
+#include "make.h"
 
-matrix_t *read_matrix(const char *filename) {
-  FILE *f = fopen(filename, "r");
-  if (f == NULL) {
-    puts("File not found");
+matrix_t *read_matrix(FILE *read_file) {
+  if (read_file == NULL) {
     return NULL;
   }
-
   matrix_t *matrix = malloc(sizeof(matrix_t));
   if (matrix == NULL) {
-    if (fclose(f)) {
-      return NULL;
-    }
     return NULL;
   }
 
-  matrix->row = ROWS;
-  matrix->col = COLS;
+  if (fscanf(read_file, "%zu%zu", &matrix->row, &matrix->col) != 2) {
+    free(matrix);
+    return NULL;
+  }
 
-  matrix->data = malloc(sizeof(float *) * ROWS);
+  matrix->data = malloc(sizeof(float *) * matrix->row);
   if (matrix->data == NULL) {
+    free(matrix);
     return NULL;
   }
 
   for (size_t i = 0; i < matrix->row; i++) {
-    matrix->data[i] = malloc(sizeof(float) * COLS);
+    matrix->data[i] = malloc(sizeof(float) * matrix->col);
     for (size_t j = 0; j < matrix->col; j++) {
-      if (fscanf(f, "%f", &matrix->data[i][j]) < 1) {
+      if (fscanf(read_file, "%f", &matrix->data[i][j]) < 1) {
         puts("Error getting matrix");
+        free(matrix->data);
         free(matrix);
-        if (fclose(f)) {
-          return NULL;
-        }
         return NULL;
       }
     }
-  }
-
-  if (fclose(f)) {
-    return NULL;
   }
 
   return matrix;
@@ -64,6 +55,21 @@ int print_matrix(matrix_t *matrix) {
 
   return NO_ERROR;
 }
+
+
+int print_answer(matrix_t *task) {
+  if (task->sum_by_column == NULL) {
+    return PRINT_ERROR;
+  }
+  printf("-------------------\n");
+  for (size_t i = 0; i < task->col; i++) {
+    printf("%5.2f ", task->sum_by_column[i]);
+  }
+  printf("\n\n");
+
+  return NO_ERROR;
+}
+
 
 int clear(matrix_t *matrix) {
 

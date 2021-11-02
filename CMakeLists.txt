@@ -3,27 +3,32 @@ project(project)
 
 set(CMAKE_C_STANDARD 11)
 
-set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
-set(CMAKE_C_FLAGS "--coverage")
+set(CMAKE_C_FLAGS "--coverage -Wall -Werror -Wpedantic")
 
-find_package(Threads REQUIRED)
-# configure_file(CMakeLists.txt.in
-#         googletest-download/CMakeLists.txt)
-# execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-#         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
-# execute_process(COMMAND ${CMAKE_COMMAND} --build .
-#         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+include_directories(project/include)
 
-# add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
-#         ${CMAKE_BINARY_DIR}/googletest-build)
+configure_file(CMakeLists.txt.in
+        googletest-download/CMakeLists.txt)
+execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+execute_process(COMMAND ${CMAKE_COMMAND} --build .
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
 
-
-# enable_testing()
-# add_subdirectory(project/test)
+add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
+        ${CMAKE_BINARY_DIR}/googletest-build)
 
 
+enable_testing()
+add_subdirectory(project/test)
 
-file(GLOB sources
-  "${PROJECT_SOURCE_DIR}/project/src/*.c")
-add_executable(prog ${sources})
+add_library(one_process STATIC ${PROJECT_SOURCE_DIR}/project/src/sum.c 
+${PROJECT_SOURCE_DIR}/project/src/make.c)
+
+add_library(multi_process SHARED ${PROJECT_SOURCE_DIR}/project/src/sum_par.c 
+${PROJECT_SOURCE_DIR}/project/src/make.c)
+
+add_executable(prog_lin ${PROJECT_SOURCE_DIR}/project/src/main.c)
+target_link_libraries(prog_lin one_process)
+
+add_executable(prog_par ${PROJECT_SOURCE_DIR}/project/src/main.c)
+target_link_libraries(prog_par multi_process)

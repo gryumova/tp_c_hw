@@ -1,0 +1,70 @@
+name: cmake
+on:
+  push:
+    branches: [dev, main]
+
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create build
+        working-directory: ${{runner.workspace}}/tp_c_hw
+        shell: bash
+        run: mkdir build
+
+
+      - name: Cmake
+        working-directory: ${{runner.workspace}}/tp_c_hw/build
+        shell: bash
+        run: cmake ..
+
+
+      - name: Make
+        working-directory: ${{runner.workspace}}/tp_c_hw/build
+        shell: bash
+        run: make
+        
+      - name: Cppcheck
+        uses: deep5050/cppcheck-action@master
+        with:
+          exclude_check: ./build
+          enable : warning,style ,performance,portability,unusedFunction,missingInclude
+          inconclusive : disable
+
+      - name: Check parallel prog
+        working-directory: ${{runner.workspace}}/TP_C_TASK2/build
+        shell: bash
+        run: time ./prog_par ../test2.txt
+
+      - name: Check liniear prog
+        working-directory: ${{runner.workspace}}/TP_C_TASK2/build
+        shell: bash
+        run: time ./prog_lin ../test2.txt
+
+      - name: Test
+        working-directory: ${{runner.workspace}}/TP_C_TASK2/build
+        shell: bash
+        run: ctest
+
+      - name: Install valgrind
+        shell: bash
+        run: sudo apt install -y valgrind
+
+      - name: Valgrind
+        working-directory: ${{runner.workspace}}/TP_C_TASK2/build
+        shell: bash
+        run: valgrind ctest
+
+      - name: Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: 90b6a608-0d2f-4540-8a40-1fc02988468c
+          fail_ci_if_error: true
+
