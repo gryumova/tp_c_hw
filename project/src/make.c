@@ -1,9 +1,12 @@
 #include "make.h"
 
-matrix_t *read_matrix(FILE *read_file) {
+matrix_t *read_matrix(const char* filename) {
+  FILE *read_file = fopen(filename, "r");
   if (read_file == NULL) {
+    puts("File not found");
     return NULL;
   }
+
   matrix_t *matrix = malloc(sizeof(matrix_t));
   if (matrix == NULL) {
     return NULL;
@@ -35,30 +38,9 @@ matrix_t *read_matrix(FILE *read_file) {
   return matrix;
 }
 
-int print_matrix(matrix_t *matrix) {
-  if (matrix == NULL) {
-    return MEM_ERROR;
-  }
-
-  if (printf("Matrix %ld * %ld:\n", matrix->row, matrix->col) < 2) {
-    return PRINT_ERROR;
-  }
-
-  for (size_t i = 0; i < matrix->row; i++) {
-    for (size_t j = 0; j < matrix->col; j++) {
-      if (printf("%10.2f", matrix->data[i][j]) < 1) {
-        return PRINT_ERROR;
-      }
-    }
-    printf("\n");
-  }
-
-  return NO_ERROR;
-}
-
 
 int print_answer(matrix_t *task) {
-  if (task->sum_by_column == NULL) {
+  if (task == NULL) {
     return PRINT_ERROR;
   }
   printf("-------------------\n");

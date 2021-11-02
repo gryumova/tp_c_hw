@@ -20,7 +20,7 @@ typedef struct matrix {
 } matrix_t;
 
 
-matrix_t *read_matrix(FILE *read_file);
-int print_matrix(matrix_t* matrix);
+// matrix_t *read_matrix(FILE *read_file);
+matrix_t *read_matrix(const char* filename);
 int print_answer(matrix_t *task);
 int clear(matrix_t *matrix);
