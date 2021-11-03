@@ -14,19 +14,23 @@ jobs:
           cd build
           cmake ..
           make
+          cd ..
 
   check_prog:
     executor: my-custom-executor
     steps:
       - checkout
       - run: |
+          cd build
           time ./prog_lin ../build/test3.txt
           time ./prog_par ../build/test3.txt
+          cd ..
   test:
     executor: my-custom-executor
     steps:
       - checkout
       - run: |
+          cd build
           ctest
 
   valgrind_and_cppcheck:
