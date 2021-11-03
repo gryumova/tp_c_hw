@@ -22,23 +22,33 @@ jobs:
           cd build
           cmake ..
           make
+          cd ..
 
       - name: Check parallel prog
-        run: time ./prog_par ../test2.txt
+        run: |
+          cd build
+          time ./prog_par ../test2.txt
+          cd ..
 
       - name: Check liniear prog
-        run: time ./prog_lin ../test2.txt
+        run: |
+          cd build
+          time ./prog_lin ../test2.txt
+          cd ..
 
       - name: Test
-        run: ctest
+        run: |
+          cd build
+          ctest
+          cd ..
 
       - name: Cppcheck
         run: |
-          cd ..
           cppcheck project/src/* --error-exitcode=1
 
       - name: Valgrind
         run: |
           cd build
           sudo apt install -y valgrind
-          valgrind ctest        
+          valgrind ctest  
+          cd ..      
