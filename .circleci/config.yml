@@ -20,16 +20,13 @@ jobs:
     steps:
       - checkout
       - run: |
-          cd build
-          ./gen_file
-          time ./prog_lin ../build/big_matrix.txt
-          time ./prog_par ../build/big_matrix.txt
+          time ./prog_lin ../build/test3.txt
+          time ./prog_par ../build/test3.txt
   test:
     executor: my-custom-executor
     steps:
       - checkout
       - run: |
-          cd build
           ctest
 
   valgrind_and_cppcheck:
