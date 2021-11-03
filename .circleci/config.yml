@@ -15,6 +15,14 @@ jobs:
           cmake ..
           make
           cd ..
+  make:
+    executor: my-custom-executor
+    steps:
+      - checkout
+      - run: |
+          cd build
+          make
+          cd ..
 
   check_prog:
     executor: my-custom-executor
@@ -48,15 +56,21 @@ workflows:
   my-custom-workflow:
     jobs:
       - build
+      - make:
+          requires:
+            - build
       - check_prog:
           requires:
             - build
+            - make
       - test:
           requires:
             - build
+            - make
             - check_prog
       - valgrind_and_cppcheck:
           requires:
             - build
+            - make
             - check_prog
             - test
