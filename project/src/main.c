@@ -7,22 +7,12 @@ int main(int argc, char *argv[]) {
     return WRONG_NUM_OF_ARG;
   }
 
-  // FILE *f = fopen(argv[1], "r");
-  // if (f == NULL) {
-  //   puts("File not found");
-  //   return FILE_ERROR;
-  // }
-
   matrix_t *task = NULL;
   task = read_matrix(argv[1]);
   if (task == NULL) {
     return CANNOT_GET_MATRIX;
   }
 
-  // if (fclose(f)) {
-  //   return FILE_ERROR;
-  // }
-  
   find_sum(task);
   print_answer(task);
 

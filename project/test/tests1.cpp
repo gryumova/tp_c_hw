@@ -11,7 +11,7 @@ TEST(TEST_CREATE_MATRIX, WRONG_FILE_NAME) {
 }
 
 TEST(TEST_CREATE_MATRIX, EMPTY_FILE) {
-    char filename[] = "../emptyfile.txt";
+    char filename[] = "../../../emptyfile.txt";
     EXPECT_EQ(read_matrix(filename), nullptr);
 }
 

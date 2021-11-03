@@ -32,3 +32,5 @@ target_link_libraries(prog_lin one_process)
 
 add_executable(prog_par ${PROJECT_SOURCE_DIR}/project/src/main.c)
 target_link_libraries(prog_par multi_process)
+
+add_executable(gen_file ${PROJECT_SOURCE_DIR}/project/src/gen.c)

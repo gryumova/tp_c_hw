@@ -13,8 +13,8 @@ TEST(TEST_LIN, NULL_MATRIX) {
 }
 
 TEST(TEST_LIN, SUM_BY_COLLUMN) {
-    char filename[] = "../../test2.txt";
+    char filename[] = "../../../test3.txt";
     matrix_t *m = read_matrix(filename);
     ASSERT_NE(m, nullptr);
-    // EXPECT_EQ(find_sum(m), NO_ERROR);
+    EXPECT_EQ(find_sum(m), NO_ERROR);
 }

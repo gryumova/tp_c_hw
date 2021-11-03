@@ -1,15 +1,10 @@
-name: cmake
-on:
-  push:
-    branches: [dev, main]
+name: CI
 
-  pull_request:
-    branches: [main]
+on: pull_request
 
 jobs:
   build:
     name: build
-    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -30,23 +25,24 @@ jobs:
         working-directory: ${{runner.workspace}}/tp_c_hw/build
         shell: bash
         run: make
-        
+
       - name: Cppcheck
-        uses: deep5050/cppcheck-action@master
-        with:
-          exclude_check: ./build
-          enable : warning,style ,performance,portability,unusedFunction,missingInclude
-          inconclusive : disable
+        run: cppcheck project/src/* --error-exitcode=1
+      
+      - name: Check parallel prog
+        working-directory: ${{runner.workspace}}/TP_C_TASK2/build
+        shell: bash
+        run: ./gen_file
 
       - name: Check parallel prog
         working-directory: ${{runner.workspace}}/TP_C_TASK2/build
         shell: bash
-        run: time ./prog_par ../test2.txt
+        run: time ./prog_lin ../build/big_matrix.txt
 
       - name: Check liniear prog
         working-directory: ${{runner.workspace}}/TP_C_TASK2/build
         shell: bash
-        run: time ./prog_lin ../test2.txt
+        run: time ./prog_par ../build/big_matrix.txt
 
       - name: Test
         working-directory: ${{runner.workspace}}/TP_C_TASK2/build

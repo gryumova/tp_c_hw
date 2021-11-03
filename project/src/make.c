@@ -9,17 +9,20 @@ matrix_t *read_matrix(const char* filename) {
 
   matrix_t *matrix = malloc(sizeof(matrix_t));
   if (matrix == NULL) {
+    fclose(read_file);
     return NULL;
   }
 
   if (fscanf(read_file, "%zu%zu", &matrix->row, &matrix->col) != 2) {
     free(matrix);
+    fclose(read_file);
     return NULL;
   }
 
   matrix->data = malloc(sizeof(float *) * matrix->row);
   if (matrix->data == NULL) {
     free(matrix);
+    fclose(read_file);
     return NULL;
   }
 
@@ -30,11 +33,13 @@ matrix_t *read_matrix(const char* filename) {
         puts("Error getting matrix");
         free(matrix->data);
         free(matrix);
+        fclose(read_file);
         return NULL;
       }
     }
   }
 
+  fclose(read_file);
   return matrix;
 }
 
