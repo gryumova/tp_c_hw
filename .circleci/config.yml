@@ -1,66 +1,46 @@
-name: CI
-
-on: pull_request
-
+version: 2.1
+executors:
+  my-custom-executor:
+    docker:
+      - image: cimg/base:stable
+      
 jobs:
   build:
-    name: build
-
+    executor: my-custom-executor
     steps:
-      - uses: actions/checkout@v2
+      - checkout
+      - run: |
+          mkdir build
+          cd build
+          cmake ..
+          make
 
-      - name: Create build
-        working-directory: ${{runner.workspace}}/tp_c_hw
-        shell: bash
-        run: mkdir build
+  check_prog:
+    executor: my-custom-executor
+    steps:
+      - checkout
+      - run: |
+          ./gen_file
+          time ./prog_lin ../build/big_matrix.txt
+          time ./prog_par ../build/big_matrix.txt
+  test:
+    executor: my-custom-executor
+    steps:
+      - checkout
+      - run: |
+          ctest
 
+  valgrind_and_cppcheck:
+    executor: my-custom-executor
+    steps:
+      - checkout
+      - run: |
+          sudo apt install -y valgrind
+          valgrind ctest
+          cd..
+          cppcheck project/src/* --error-exitcode=1
 
-      - name: Cmake
-        working-directory: ${{runner.workspace}}/tp_c_hw/build
-        shell: bash
-        run: cmake ..
-
-
-      - name: Make
-        working-directory: ${{runner.workspace}}/tp_c_hw/build
-        shell: bash
-        run: make
-
-      - name: Cppcheck
-        run: cppcheck project/src/* --error-exitcode=1
-      
-      - name: Check parallel prog
-        working-directory: ${{runner.workspace}}/TP_C_TASK2/build
-        shell: bash
-        run: ./gen_file
-
-      - name: Check parallel prog
-        working-directory: ${{runner.workspace}}/TP_C_TASK2/build
-        shell: bash
-        run: time ./prog_lin ../build/big_matrix.txt
-
-      - name: Check liniear prog
-        working-directory: ${{runner.workspace}}/TP_C_TASK2/build
-        shell: bash
-        run: time ./prog_par ../build/big_matrix.txt
-
-      - name: Test
-        working-directory: ${{runner.workspace}}/TP_C_TASK2/build
-        shell: bash
-        run: ctest
-
-      - name: Install valgrind
-        shell: bash
-        run: sudo apt install -y valgrind
-
-      - name: Valgrind
-        working-directory: ${{runner.workspace}}/TP_C_TASK2/build
-        shell: bash
-        run: valgrind ctest
-
-      - name: Codecov
-        uses: codecov/codecov-action@v1
-        with:
-          token: 90b6a608-0d2f-4540-8a40-1fc02988468c
-          fail_ci_if_error: true
-
+workflows:
+  my-custom-workflow:
+    jobs:
+      - build
