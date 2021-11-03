@@ -44,3 +44,15 @@ workflows:
   my-custom-workflow:
     jobs:
       - build
+      - check_prog:
+          requires:
+            - build
+      - test:
+          requires:
+            - build
+            - check_prog
+      - valgrind_and_cppcheck:
+          requires:
+            - build
+            - check_prog
+            - test
