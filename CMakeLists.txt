@@ -6,6 +6,7 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_FLAGS "--coverage -Wall -Werror -Wpedantic")
 
 include_directories(project/include)
+include_directories(project/include/test/include)
 
 configure_file(CMakeLists.txt.in
         googletest-download/CMakeLists.txt)

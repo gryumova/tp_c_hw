@@ -1,6 +1,6 @@
 #include "make.h"
 
-matrix_t *read_matrix(const char* filename) {
+matrix_t *read_matrix(const char *filename) {
   FILE *read_file = fopen(filename, "r");
   if (read_file == NULL) {
     puts("File not found");
@@ -43,12 +43,11 @@ matrix_t *read_matrix(const char* filename) {
   return matrix;
 }
 
-
 int print_answer(matrix_t *task) {
   if (task == NULL) {
     return PRINT_ERROR;
   }
-  printf("-------------------\n");
+
   for (size_t i = 0; i < task->col; i++) {
     printf("%5.2f ", task->sum_by_column[i]);
   }
@@ -57,9 +56,7 @@ int print_answer(matrix_t *task) {
   return NO_ERROR;
 }
 
-
 int clear(matrix_t *matrix) {
-
   for (size_t i = 0; i < matrix->row; i++) {
     free(matrix->data[i]);
   }

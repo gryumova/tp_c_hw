@@ -9,7 +9,7 @@ foreach(file ${tests})
   set(name)
   get_filename_component(name ${file} NAME_WE)
   add_executable("${name}_tests"
-    ${sources}
+    ${PROJECT_SOURCE_DIR}/project/test/stress_test/src/utils.c
     ${file}
     "${PROJECT_SOURCE_DIR}/project/test/main.cpp")
   target_link_libraries("${name}_tests" gtest_main one_process multi_process)

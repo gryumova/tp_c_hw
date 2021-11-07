@@ -10,6 +10,7 @@ enum error_list {
     PRINT_ERROR = 4,
     CANNOT_GET_MATRIX = 5,
     FILE_ERROR = 6,
+    ANSWER_ERROR = 7,
 };
 
 typedef struct matrix {

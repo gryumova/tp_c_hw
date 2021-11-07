@@ -5,8 +5,6 @@ int find_sum(matrix_t *task) {
     return MEM_ERROR;
   }
 
-  // FILE *file = fopen("sum_par_debug.txt", "w");
-
   float *shared_memory =
       mmap(NULL, task->col * sizeof(float), PROT_READ | PROT_WRITE,
            MAP_SHARED | MAP_ANONYMOUS, -1, 0);
@@ -46,23 +44,6 @@ int find_sum(matrix_t *task) {
       }
     }
 
-    // if (i == process_count - 1) {
-    //   for (size_t j = i * part_size; j < task->row; j++) {
-    //     for (size_t k = 0; k < task->col; k++) {
-    //       shared_memory[k] += task->data[j][k];
-    //       // fprintf(file, "%10.2f", shared_memory[k]);
-    //     }
-    //   }
-    // } else {
-    //   for (size_t j = i * part_size; j < (i + 1) * part_size; j++) {
-    //     for (size_t k = 0; k < task->col; k++) {
-    //       shared_memory[k] += task->data[j][k];
-    //       // fprintf(file, "%10.2f", shared_memory[k]);
-    //     }
-    //     // fprintf(file, "\n");
-    //   }
-    // }
-
     if (shared_memory == NULL) {
       exit(EXIT_FAILURE);
     }
@@ -79,8 +60,6 @@ int find_sum(matrix_t *task) {
   }
 
   task->sum_by_column = shared_memory;
-
-  // fclose(file);
 
   return NO_ERROR;
 }

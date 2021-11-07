@@ -27,13 +27,15 @@ jobs:
       - name: Check parallel prog
         run: |
           cd build
-          time ./prog_par ../test2.txt
+          ./gen_file
+          time ./prog_par ./big_matrix.txt
           cd ..
 
       - name: Check liniear prog
         run: |
           cd build
-          time ./prog_lin ../test2.txt
+          ./gen_file
+          time ./prog_lin ./big_matrix.txt
           cd ..
 
       - name: Test
@@ -44,6 +46,7 @@ jobs:
 
       - name: Cppcheck
         run: |
+          sudo apt-get install -y cppcheck
           cppcheck project/src/* --error-exitcode=1
 
       - name: Valgrind
