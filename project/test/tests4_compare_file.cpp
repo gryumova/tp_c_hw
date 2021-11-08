@@ -8,5 +8,5 @@ extern "C" {
 }
 
 TEST(STRESS_TEST, compare) {
-  EXPECT_EQ(comparison("test_lin.txt", "test_par.txt"),NO_ERROR);
+  EXPECT_EQ(comparison("test_lin.txt", "test_par.txt"), NO_ERROR);
 }

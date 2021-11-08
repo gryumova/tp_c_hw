@@ -60,6 +60,5 @@ int find_sum(matrix_t *task) {
   }
 
   task->sum_by_column = shared_memory;
-
   return NO_ERROR;
 }

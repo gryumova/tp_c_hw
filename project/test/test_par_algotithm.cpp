@@ -14,7 +14,7 @@ TEST(STRESS_TEST, par_algorithm) {
 
   for (size_t i = 1; i < 5; i++) {
     EXPECT_EQ(generate_matrix(test_file, 100 * i, 50 * i), NO_ERROR);
-  
+
     task = read_matrix(test_file);
 
     ASSERT_EQ(find_sum(task), NO_ERROR);
