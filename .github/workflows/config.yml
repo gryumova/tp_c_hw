@@ -1,0 +1,63 @@
+name: CI
+
+# Controls when the workflow will run
+on: [push]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    name: build
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: build
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          make
+          cd ..
+
+      - name: Check parallel prog
+        run: |
+          cd build
+          ./gen_file
+          time ./prog_par ./big_matrix.txt
+          cd ..
+
+      - name: Check linear prog
+        run: |
+          cd build
+          ./gen_file
+          time ./prog_lin ./big_matrix.txt
+          cd ..
+
+      - name: Test
+        run: |
+          cd build
+          ctest
+          cd ..
+
+      - name: Cppcheck
+        run: |
+          sudo apt-get install -y cppcheck
+          cppcheck project/src/* --error-exitcode=1
+
+      - name: Valgrind
+        run: |
+          cd build
+          sudo apt install -y valgrind
+          valgrind ctest  
+          cd ..    
+
+      - name: Coverage
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
