@@ -10,7 +10,6 @@ int find_sum(matrix_t *task) {
            MAP_SHARED | MAP_ANONYMOUS, -1, 0);
 
   if (shared_memory == MAP_FAILED) {
-    printf("Mapping Failed\n");
     return MEM_ERROR;
   }
 
@@ -53,7 +52,6 @@ int find_sum(matrix_t *task) {
 
   for (size_t i = 0; i < process_count; ++i) {
     if (waitpid(pids[i], &status, 0) != pids[i]) {
-      printf("can't wait for pids\n");
       free(pids);
       return MEM_ERROR;
     }

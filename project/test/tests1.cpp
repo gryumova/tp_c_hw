@@ -58,5 +58,5 @@ TEST(TEST_CLEAR, CLEAR_MATRIX) {
   }
 
   EXPECT_EQ(print_answer(m), NO_ERROR);
-  EXPECT_EQ(clear(m), NO_ERROR);
+  EXPECT_EQ(clear_matrix(m), NO_ERROR);
 }

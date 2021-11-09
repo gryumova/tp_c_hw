@@ -4,7 +4,6 @@
 
 int main(int argc, char *argv[]) {
   if (argc < 2) {
-    puts("Wrong number of arguments!");
     return WRONG_NUM_OF_ARG;
   }
 
@@ -17,6 +16,6 @@ int main(int argc, char *argv[]) {
   find_sum(task);
   print_answer(task);
 
-  clear(task);
+  clear_matrix(task);
   return NO_ERROR;
 }

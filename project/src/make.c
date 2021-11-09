@@ -3,7 +3,10 @@
 matrix_t *read_matrix(const char *filename) {
   FILE *read_file = fopen(filename, "r");
   if (read_file == NULL) {
-    puts("File not found");
+    return NULL;
+  }
+
+  if (read_file == NULL) {
     return NULL;
   }
 
@@ -30,7 +33,6 @@ matrix_t *read_matrix(const char *filename) {
     matrix->data[i] = malloc(sizeof(float) * matrix->col);
     for (size_t j = 0; j < matrix->col; j++) {
       if (fscanf(read_file, "%f", &matrix->data[i][j]) < 1) {
-        puts("Error getting matrix");
         free(matrix->data);
         free(matrix);
         fclose(read_file);
@@ -56,12 +58,10 @@ int print_answer(matrix_t *task) {
   return NO_ERROR;
 }
 
-int clear(matrix_t *matrix) {
+int clear_matrix(matrix_t *matrix) {
   for (size_t i = 0; i < matrix->row; i++) {
     free(matrix->data[i]);
   }
-
-  free(matrix->data);
 
   return NO_ERROR;
 }
